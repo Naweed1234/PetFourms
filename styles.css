@@ -13,3 +13,21 @@ div{
     display:flex;
     justify-content: space-between;
 }
+/* CSS */
+#search-button {
+    background-color: #007bff;
+    /* Change this color to the desired contrast color */
+    color: #fff;
+    /* Set text color for better readability */
+    border-color: #007bff;
+    /* Modify border color if needed */
+    /* Other styles as needed */
+}
+
+
+@media (max-width: 768px) {
+    .card {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+}
