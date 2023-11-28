@@ -5,19 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Pet Owners' Online Community</title>
     <link rel="icon" type="image/png" href="https://fav.farm/🐕" />
+    <script src="../jsFiles/script.js"></script>
+
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
       rel="stylesheet"
       integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
       crossorigin="anonymous"
     />
-    <script src="dogscript.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="..."
+      crossorigin="anonymous"
+    ></script>
   </head>
 
   <body>
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
       <div class="container-fluid">
-        <a class="navbar-brand" href="index.html">PetForums 🐕</a>
+        <a class="navbar-brand" href="index.html">PetFourms 🐕</a>
         <button
           class="navbar-toggler"
           type="button"
@@ -55,7 +61,7 @@
                     class="dropdown-item"
                     style="color: blue; font-size: 17px"
                     href="fish.html"
-                    >Fish Forums</a
+                    >Fish Fourms</a
                   >
                 </li>
                 <li>
@@ -63,7 +69,7 @@
                     class="dropdown-item"
                     style="color: blue; font-size: 17px"
                     href="cats.html"
-                    >Cat Forums</a
+                    >Cat Fourms</a
                   >
                 </li>
 
@@ -72,7 +78,7 @@
                     class="dropdown-item"
                     style="color: blue; font-size: 17px"
                     href="dogs.html"
-                    >Dog Forums</a
+                    >Dog Fourms</a
                   >
                 </li>
                 <li>
@@ -90,49 +96,16 @@
       </div>
     </nav>
 
-    <div
-      style="
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 20px;
-        margin: 20px;
-      "
-    >
+    <div>
       <figure>
-        <img
-          src="images/DogImage2.jpeg"
-          width="200"
-          height="150"
-          style="border-radius: 8px"
-        />
-        <figcaption style="text-align: center">
-          Post your pictures here!
-        </figcaption>
+        <img src="../images/CatImage3.jpeg" width="200" height="150" />
+        <figcaption>Post your pictures here!</figcaption>
       </figure>
 
       <figure>
-        <img
-          src="images/DogImage3.jpg"
-          width="200"
-          height="150"
-          style="border-radius: 8px"
-        />
-        <figcaption style="text-align: center">
-          Discussion Placeholder
-        </figcaption>
+        <img src="../images/CatImage4.jpg" width="200" height="150" />
+        <figcaption>Post your pictures here!</figcaption>
       </figure>
-
-      <div class="input-group" style="margin-top: 20px">
-        <div class="form-outline" style="width: 200px">
-          <input id="search-input" type="search" class="form-control" />
-          <label class="form-label" for="search-input">Search</label>
-        </div>
-        <button id="search-button" type="button" class="btn btn-primary">
-          Search
-        </button>
-      </div>
     </div>
-    <div id="image-container"></div>
   </body>
 </html>
