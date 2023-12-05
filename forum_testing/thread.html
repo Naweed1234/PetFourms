@@ -19,7 +19,7 @@
             </h4>
             <div class="bottom">
                 <p class="timestamp">
-                    ${new Date(thread.date).toLocaleString()}
+                    ${new Date(thread.data).toLocaleDateString()}
                 </p>
                 <p class="comment-count">
                     ${thread.comments.length} comments
@@ -36,7 +36,7 @@
                             ${comment.author}
                         </p>
                         <p class="comment-ts">
-                            ${new Date(comment.date).toLocaleString()}
+                            ${new Date(comment.date).toLocaleDateString()}
                         </p>
                     </div>
                     <div class="comment-content">
@@ -118,6 +118,9 @@
     }
     .comment {
       margin: 20px 0;
+    }
+    .comment-ts{
+      padding-left: 10px;
     }
   </style>
 </body>

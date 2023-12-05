@@ -9,7 +9,6 @@
     </div>
     <script src="../forum_testing/data.js"></script>
     <script>
-        console.log(threads);
         var container = document.querySelector('ol');
         for (let thread of threads){
             var html = `
@@ -20,7 +19,7 @@
                         </h4>
                         <div class="bottom">
                             <p class="timestamp">
-                                ${new Date(thread.date).toLocaleString}
+                                ${new Date(thread.data).toLocaleDateString()}
                             </p>
                             <p class="comment-count">
                                 ${thread.comments.length} comments
