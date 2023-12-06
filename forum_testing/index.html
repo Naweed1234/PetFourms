@@ -1,72 +1,100 @@
-<body>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Forum</title>
+    <style>
+      html,
+      body {
+        height: 100%;
+        margin: 10;
+      }
+      a {
+        text-decoration: none;
+        color: black;
+      }
+      h1,
+      h4,
+      ol {
+        margin: 0;
+      }
+      p {
+        margin: 5px 0;
+      }
+      .top-bar {
+        background-color: orange;
+        padding: 0 40px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 2px solid black; /* Add a border at the bottom of the top bar */
+      }
+      .top-bar a {
+        color: black;
+        margin-right: 10px;
+        font-weight: bold;
+        border: 1px solid black; /* Add a border to the buttons */
+        padding: 5px 10px; /* Add padding to the buttons for better visibility */
+        border-radius: 5px; /* Add rounded corners to the buttons */
+      }
+      .bottom {
+        display: flex;
+      }
+      .timestamp {
+        padding-right: 10px;
+      }
+      .row {
+        padding: 5px 0;
+      }
+      .main {
+        background-color: lightgray;
+        padding: 10px 15px;
+      }
+      .bottom {
+        display: flex;
+        color: grey;
+        font-size: 12px;
+      }
+    </style>
+  </head>
+  <body style="width: 100%; height: 100%">
     <div class="top-bar">
-        <h1>
-            My Forum
-        </h1>
+      <h1>My Forum</h1>
+      <div>
+        <!-- Add Home and About buttons with styling -->
+        <a href="../htmlFiles/index.html">Home</a>
+        <a href="../htmlFiles/about.html">About</a>
+      </div>
     </div>
     <div class="main">
-    <ol></ol>
+      <ol></ol>
     </div>
     <script src="../forum_testing/data.js"></script>
     <script>
-        var container = document.querySelector('ol');
-        for (let thread of threads){
-            var html = `
-                <li class="row">
-                    <a href="../forum_testing/thread.html?${thread.id}">
-                        <h4 class="title">
-                            ${thread.title}
-                        </h4>
-                        <div class="bottom">
-                            <p class="timestamp">
-                                ${new Date(thread.data).toLocaleDateString()}
-                            </p>
-                            <p class="comment-count">
-                                ${thread.comments.length} comments
-                            </p>
-                        </div>
-                    </a>
-                </li>
-            `
+      var container = document.querySelector("ol");
+      for (let thread of threads) {
+        var html = `
+              <li class="row">
+                  <a href="../forum_testing/thread.html?${thread.id}">
+                      <h4 class="title">
+                          ${thread.title}
+                      </h4>
+                      <div class="bottom">
+                          <p class="timestamp">
+                              ${new Date(thread.data).toLocaleDateString()}
+                          </p>
+                          <p class="comment-count">
+                              ${thread.comments.length} comments
+                          </p>
+                      </div>
+                  </a>
+              </li>
+          `;
 
-            container.insertAdjacentHTML('beforeend', html)
-        }
+        container.insertAdjacentHTML("beforeend", html);
+      }
     </script>
-    <style>
-        body {
-            margin: 10px 60px;
-        }
-        a {
-            text-decoration: none;
-            color: black;
-        }
-        h1, h4, ol{
-            margin: 0;
-        }
-        p {
-            margin: 5px 0;
-        }
-        .top-bar{
-            background-color: orange;
-            padding: 0 40px;
-        }
-        .bottom{
-            display: flex;
-        }
-        .timestamp {
-            padding-right: 10px;
-        }
-        .row {
-            padding: 5px 0;
-        }
-        .main{
-            background-color: lightgray;
-            padding: 10px 15px;
-        }
-        .bottom{
-            display: flex;
-            color: grey;
-            font-size: 12px;
-        }
-    </style>
-</body>
+  </body>
+</html>
