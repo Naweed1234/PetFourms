@@ -4,12 +4,12 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>My Forum</title>
+    <title>Forum Page</title>
     <style>
       html,
       body {
         height: 100%;
-        margin: 10;
+        margin: 10px; /* Fix the margin property */
       }
       a {
         text-decoration: none;
@@ -61,7 +61,7 @@
   </head>
   <body style="width: 100%; height: 100%">
     <div class="top-bar">
-      <h1>My Forum</h1>
+      <h1>Pet Fourms</h1>
       <div>
         <!-- Add Home and About buttons with styling -->
         <a href="../htmlFiles/index.html">Home</a>
@@ -71,27 +71,36 @@
     <div class="main">
       <ol></ol>
     </div>
-    <script src="../forum_testing/data.js"></script>
+    <script src="data.js"></script>
     <script>
       var container = document.querySelector("ol");
       for (let thread of threads) {
+        var forumTitle =
+          thread.id === 1
+            ? "Dog Forums"
+            : thread.id === 2
+            ? "Cat Forums"
+            : thread.id === 3
+            ? "Fish Forums"
+            : "General Forums";
+
         var html = `
-              <li class="row">
-                  <a href="../forum_testing/thread.html?${thread.id}">
-                      <h4 class="title">
-                          ${thread.title}
-                      </h4>
-                      <div class="bottom">
-                          <p class="timestamp">
-                              ${new Date(thread.data).toLocaleDateString()}
-                          </p>
-                          <p class="comment-count">
-                              ${thread.comments.length} comments
-                          </p>
-                      </div>
-                  </a>
-              </li>
-          `;
+      <li class="row">
+        <a href="thread.html?${thread.id}">
+          <h4 class="title">
+            ${forumTitle} 
+          </h4>
+          <div class="bottom">
+            <p class="timestamp">
+               Last Post: ${new Date(thread.data).toLocaleDateString()}
+            </p>
+            <p class="comment-count">
+              ${thread.comments.length} comments
+            </p>
+          </div>
+        </a>
+      </li>
+    `;
 
         container.insertAdjacentHTML("beforeend", html);
       }
