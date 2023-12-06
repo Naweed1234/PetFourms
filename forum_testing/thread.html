@@ -28,9 +28,10 @@
         `;
     header.insertAdjacentHTML("beforeend", headerHtml);
 
-    function addComment(comment) {
+    function addComment(comment, index) {
+      console.log(index);
       var commentHtml = `
-                <div class="comment">
+                <div class="comment" id="comment-${index}">
                     <div class="top-comment">
                         <p class="user">
                             ${comment.author}
@@ -38,6 +39,12 @@
                         <p class="comment-ts">
                             ${new Date(comment.date).toLocaleDateString()}
                         </p>
+                        <button class="edit" data-index="${index}">
+                          edit
+                        </button>
+                        <button class="delete" data-index=${index}>
+                          remove
+                        </button>
                     </div>
                     <div class="comment-content">
                         ${comment.content}
@@ -47,9 +54,29 @@
       comments.insertAdjacentHTML("beforeend", commentHtml);
     }
 
+    function removeComment(index){
+      var commentToRemove = document.getElementById(`comment-${index}`);
+      if (commentToRemove){
+        commentToRemove.remove();
+        thread.comments.splice(index, 1);
+        localStorage.setItem("threads", JSON.stringify(threads))
+      }
+    }
+
+    function editComment(index, newContent) {
+      thread.comments[index].content = newContent;
+      localStorage.setItem("threads", JSON.stringify(threads));
+
+      var commentToEdit = document.getElementById(`comment-${index}`);
+      if (commentToEdit) {
+        var commentContent = commentToEdit.querySelector('.comment-content');
+        commentContent.textContent = newContent;
+      }
+    }
+
     var comments = document.querySelector(".comments");
     for (let comment of thread.comments) {
-      addComment(comment);
+      addComment(comment, 0);
     }
 
     var btn = document.querySelector("button");
@@ -58,12 +85,32 @@
       var comment = {
         content: txt.value,
         date: Date.now(),
-        author: "Aaron",
+        author: "Guest",
       };
-      addComment(comment);
+      addComment(comment, inc++);
       txt.value = "";
       thread.comments.push(comment);
       localStorage.setItem("threads", JSON.stringify(threads));
+    });
+
+    comments.addEventListener('click', function(event){
+      if(event.target.classList.contains("delete")){
+        console.log(event.target);
+        var index = event.target.getAttribute("data-index");
+        removeComment(index);
+      } else if (event.target.classList.contains("edit")) {
+        console.log(event.target);
+        var index = event.target.getAttribute("data-index");
+        var commentToEdit = thread.comments[index];
+
+        var newContent = prompt("Edit your comment:", commentToEdit.content);
+        if (newContent !== null) {
+          editComment(index, newContent);
+        }
+      } else if (event.target.classList.contains("delete")) {
+        var index = event.target.getAttribute("data-index");
+        removeComment(index);
+      }
     });
   </script>
   <style>
@@ -121,6 +168,20 @@
     }
     .comment-ts{
       padding-left: 10px;
+    }
+    .edit{
+      color: salmon;
+      padding-left: 20px;
+      padding-right: 20px;
+      margin-left: 10px;
+      margin-right: 10px;
+    }
+    .delete{
+      color: salmon;
+      padding-left: 20px;
+      padding-right: 20px;
+      margin-left: 5px;
+      margin-right: 5px;
     }
   </style>
 </body>
