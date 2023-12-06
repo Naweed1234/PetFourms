@@ -9,7 +9,7 @@
       html,
       body {
         height: 100%;
-        margin: 10px; /* Fix the margin property */
+        margin: 0; /* Remove margin to fill the entire viewport */
       }
       a {
         text-decoration: none;
@@ -46,11 +46,12 @@
         padding-right: 10px;
       }
       .row {
-        padding: 5px 0;
+        padding: 10px 0; /* Increase vertical padding */
       }
       .main {
         background-color: lightgray;
-        padding: 10px 15px;
+        padding: 20px 30px; /* Increase padding */
+        height: 100%; /* Fill the entire height of the viewport */
       }
       .bottom {
         display: flex;
@@ -74,33 +75,32 @@
     <script src="data.js"></script>
     <script>
       var container = document.querySelector("ol");
+
+      console.log("Threads from Local Storage:", threads);
+
       for (let thread of threads) {
-        var forumTitle =
-          thread.id === 1
-            ? "Dog Forums"
-            : thread.id === 2
-            ? "Cat Forums"
-            : thread.id === 3
-            ? "Fish Forums"
-            : "General Forums";
+        // Generate a dynamic forum title based on the thread's id
+        var forumTitle = `Forum ${thread.id}`;
+
+        console.log("Forum Title:", forumTitle);
 
         var html = `
-      <li class="row">
-        <a href="thread.html?${thread.id}">
-          <h4 class="title">
-            ${forumTitle} 
-          </h4>
-          <div class="bottom">
-            <p class="timestamp">
-               Last Post: ${new Date(thread.data).toLocaleDateString()}
-            </p>
-            <p class="comment-count">
-              ${thread.comments.length} comments
-            </p>
-          </div>
-        </a>
-      </li>
-    `;
+    <li class="row">
+      <a href="thread.html?${thread.id}">
+        <h4 class="title">
+          ${forumTitle}
+        </h4>
+        <div class="bottom">
+          <p class="timestamp">
+             Last Post: ${new Date(thread.data).toLocaleDateString()}
+          </p>
+          <p class="comment-count">
+            ${thread.comments.length} comments
+          </p>
+        </div>
+      </a>
+    </li>
+  `;
 
         container.insertAdjacentHTML("beforeend", html);
       }

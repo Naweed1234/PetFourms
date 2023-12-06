@@ -59,6 +59,7 @@ var defaultThreads = [
 ];
 
 var threads;
+
 if (localStorage && localStorage.getItem("threads")) {
   threads = JSON.parse(localStorage.getItem("threads"));
 } else {
