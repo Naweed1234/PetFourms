@@ -37,25 +37,6 @@ var defaultThreads = [
       },
     ],
   },
-  {
-    id: 3,
-    title: "Fish Forums",
-    author: "Aaron",
-    data: Date.now(),
-    content: "Join the discussion about fish and aquariums!",
-    comments: [
-      {
-        author: "FishLover",
-        date: Date.now(),
-        content: "I have a beautiful aquarium with colorful fish.",
-      },
-      {
-        author: "AquariumMaster",
-        date: Date.now(),
-        content: "Looking for advice on maintaining a healthy fish tank.",
-      },
-    ],
-  },
 ];
 
 var threads;
