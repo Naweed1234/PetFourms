@@ -78,60 +78,109 @@
     <script src="data.js"></script>
     <script>
       var id = window.location.search.slice(1);
-      var thread = threads.find((t) => t.id == id);
-      var header = document.querySelector(".header");
-      var headerHtml = `
-        <h4 class="title">
-          ${thread.title}
-        </h4>
-        <div class="bottom">
-          <p class="timestamp">
-            ${new Date(thread.data).toLocaleDateString()}
-          </p>
-          <p class="comment-count">
-            ${thread.comments.length} comments
-          </p>
-        </div>
-      `;
-      header.insertAdjacentHTML("beforeend", headerHtml);
-
-      function addComment(comment) {
-        var commentHtml = `
-          <div class="comment">
-            <div class="top-comment">
-              <p class="user">
-                ${comment.author}
-              </p>
-              <p class="comment-ts">
-                ${new Date(comment.date).toLocaleDateString()}
-              </p>
+    var thread = threads.find((t) => t.id == id);
+    var header = document.querySelector(".header");
+    var headerHtml = `
+            <h4 class="title">
+                ${thread.title}
+            </h4>
+            <div class="bottom">
+                <p class="timestamp">
+                    ${new Date(thread.data).toLocaleDateString()}
+                </p>
+                <p class="comment-count">
+                    ${thread.comments.length} comments
+                </p>
             </div>
-            <div class="comment-content">
-              ${comment.content}
-            </div>
-          </div>
         `;
-        comments.insertAdjacentHTML("beforeend", commentHtml);
-      }
+    header.insertAdjacentHTML("beforeend", headerHtml);
 
-      var comments = document.querySelector(".comments");
-      for (let comment of thread.comments) {
-        addComment(comment);
-      }
+    function addComment(comment, index) {
+      console.log(index);
+      var commentHtml = `
+                <div class="comment" id="comment-${index}">
+                    <div class="top-comment">
+                        <p class="user">
+                            ${comment.author}
+                        </p>
+                        <p class="comment-ts">
+                            ${new Date(comment.date).toLocaleDateString()}
+                        </p>
+                        <button class="edit" data-index="${index}">
+                          edit
+                        </button>
+                        <button class="delete" data-index=${index}>
+                          remove
+                        </button>
+                    </div>
+                    <div class="comment-content">
+                        ${comment.content}
+                    </div>
+                </div>
+            `;
+      comments.insertAdjacentHTML("beforeend", commentHtml);
+    }
 
-      var btn = document.querySelector("button");
-      btn.addEventListener("click", function () {
-        var txt = document.querySelector("textarea");
-        var comment = {
-          content: txt.value,
-          date: Date.now(),
-          author: "Aaron",
-        };
-        addComment(comment);
-        txt.value = "";
-        thread.comments.push(comment);
-        localStorage.setItem("threads", JSON.stringify(threads));
-      });
+    function removeComment(index){
+      var commentToRemove = document.getElementById(`comment-${index}`);
+      if (commentToRemove){
+        commentToRemove.remove();
+        thread.comments.splice(index, 1);
+        localStorage.setItem("threads", JSON.stringify(threads))
+      }
+    }
+
+    function editComment(index, newContent) {
+      thread.comments[index].content = newContent;
+      localStorage.setItem("threads", JSON.stringify(threads));
+
+      var commentToEdit = document.getElementById(`comment-${index}`);
+      if (commentToEdit) {
+        var commentContent = commentToEdit.querySelector('.comment-content');
+        commentContent.textContent = newContent;
+      }
+    }
+
+    var comments = document.querySelector(".comments");
+    for (let comment of thread.comments) {
+      addComment(comment, 0);
+    }
+
+    let inc = 0;
+    var btn = document.querySelector("button");
+    btn.addEventListener("click", function () {
+      var txt = document.querySelector("textarea");
+      var comment = {
+        content: txt.value,
+        date: Date.now(),
+        author: "Guest",
+      };
+      addComment(comment, inc);
+      inc = inc + 1;
+      txt.value = "";
+      thread.comments.push(comment);
+      localStorage.setItem("threads", JSON.stringify(threads));
+    });
+
+    comments.addEventListener('click', function(event){
+      if(event.target.classList.contains("delete")){
+        console.log(event.target);
+        var index = event.target.getAttribute("data-index");
+        removeComment(index);
+      } else if (event.target.classList.contains("edit")) {
+        console.log(event.target);
+        var index = event.target.getAttribute("data-index");
+        var commentToEdit = thread.comments[index];
+
+        var newContent = prompt("Edit your comment:", commentToEdit.content);
+        if (newContent !== null) {
+          editComment(index, newContent);
+        }
+      } else if (event.target.classList.contains("delete")) {
+        var index = event.target.getAttribute("data-index");
+        removeComment(index);
+      }
+    });
     </script>
     <style>
       html {
