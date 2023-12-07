@@ -80,7 +80,12 @@
 
       for (let thread of threads) {
         // Generate a dynamic forum title based on the thread's id
-        var forumTitle = `Forum ${thread.id}`;
+        if (thread.id == 1) {
+          var forumTitle = "Dog Fourms";
+        }
+        if (thread.id == 2) {
+          var forumTitle = "Cat Fourms";
+        }
 
         console.log("Forum Title:", forumTitle);
 
